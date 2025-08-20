@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="container mt-4" style="max-width: 800px;">
+    <h1 class="text-center mb-4">Task list</h1>
+  <div class="d-flex justify-content-end mb-3">
+    <a href="{% url 'todolist:task-create' %}" class="btn btn-primary">➕ Add Task</a>
+  </div>
+    {% if tasks %}
+      <ul class="list-group">
+        {% for task in tasks %}
+          <li class="list-group-item mb-3 shadow-sm rounded">
+            <div class="d-flex justify-content-between align-items-center">
+              <h5 class="fw-bold mb-2">
+                {{ task.content }}
+                {% if task.is_done %}
+                  <span class="text-success">Done</span>
+                {% else %}
+                  <span class="text-danger">Not done</span>
+                {% endif %}
+              </h5>
+            </div>
+
+            <p class="text-muted mb-1" style="font-size: 0.9em;">
+              Created: {{ task.datetime|date:"F j, Y H:i" }}<br>
+              {% if task.deadline %}
+                Deadline: <span class="text-danger">{{ task.deadline|date:"F j, Y H:i" }}</span><br>
+              {% endif %}
+            </p>
+
+            {% if task.tags.all %}
+              <p class="text-secondary" style="font-size: 0.9em;">
+                Tags:
+                {% for tag in task.tags.all %}
+                  <span class="badge bg-secondary">{{ tag.name }}</span>
+                {% endfor %}
+              </p>
+            {% endif %}
+
+            <div class="btn-group mt-2" role="group">
+              <a href="{% url 'todolist:task-update' pk=task.id %}" class="btn btn-outline-primary btn-sm">Update</a>
+              <a href="{% url 'todolist:task-delete' pk=task.id %}" class="btn btn-outline-danger btn-sm">Delete</a>
+              <a href="{% url 'todolist:task-toggle' pk=task.id %}" class="btn btn-outline-secondary btn-sm">
+                {% if task.is_done %}Undo{% else %}Complete{% endif %}
+              </a>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="text-center text-muted">There are no tasks in your list</p>
+    {% endif %}
+  </div>
+{% endblock %}
