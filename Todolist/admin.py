@@ -1,3 +1,13 @@
 from django.contrib import admin
 
-# Register your models here.
+from Todolist.models import Task, Tag
+
+
+@admin.register(Tag)
+class TagAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Task)
+class TaskAdmin(admin.ModelAdmin):
+    pass

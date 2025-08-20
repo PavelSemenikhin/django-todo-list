@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Delete Task?</h1>
+  <p>Are you sure you want to delete task: <strong>{{ object.content }}</strong></p>
+  <form action="" method="post">
+    {% csrf_token %}
+
+    <input type="submit" value="Yes" class="btn btn-danger">
+    <a href="{% url 'todolist:home' %}" class="btn btn-secondary">Cancel</a>
+  </form>
+{% endblock %}

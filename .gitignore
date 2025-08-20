@@ -1,3 +1,23 @@
-.idea
-.venv
-**__pycache__
+# Віртуальне середовище
+.venv/
+
+# Кеші та компіляції
+__pycache__/
+*.py[cod]
+*.sqlite3
+
+# Ідеї та редактори
+.idea/
+.vscode/
+
+# Файли середовища
+.env
+*.env
+
+# Файли тестів і покриття (якщо додаватимеш тести)
+.coverage
+htmlcov/
+
+# Django static/media
+staticfiles/
+media/
